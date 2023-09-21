@@ -14,9 +14,20 @@ def calculate_possibilities(size, len)
   middle_width = size - 2 * corner_len
   middle_height = size - 2 * corner_len
 
-  corner_count = corner_len * corner_len * 3 * 4
-  edge_count = edge_width * edge_width * 4
-  middle_count =
+  corner_size = corner_len * corner_len * 4
+  edge_size = edge_width * edge_height * 4
+  middle_size = middle_width * middle_height
+
+  corner = 3
+  if long_word
+    edge = 1
+    middle = 0
+  else
+    edge = 5
+    middle = 8
+  end
+
+  corner * corner_size + edge * edge_size + middle * middle_size
 end
 
 puts "What is the size of the square?"
@@ -25,4 +36,5 @@ size = gets.chomp.to_i
 puts "What is the length of the word?"
 len = gets.chomp.to_i
 
-calculate_possibilities(size, len)
+total = calculate_possibilities(size, len)
+puts "Total is: #{total}"
