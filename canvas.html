@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Canvas</title>
+</head>
+<body>
+
+<canvas style="position: absolute; left: 0; top: 0;"></canvas>
+
+<script type="text/javascript">
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+
+  canvas.setAttribute('width', window.innerWidth);
+  canvas.setAttribute('height', window.innerHeight);
+
+  let x = 0, y = 500;
+
+  ctx.fillStyle = 'red';
+  ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+
+  function draw() {
+
+    ctx.textBaseline = 'top';
+    ctx.fillStyle = `rgba(${Math.round(Math.random() * 255)},${Math.round(Math.random() * 255)},${Math.round(Math.random() * 255)}, ${Math.random() * Math.random()})`;
+    // ctx.fillStyle = 'turquoise';
+    ctx.font = '543px Arial';
+    ctx.fillText('Hi, Luke!', x, y)
+  }
+
+  window.addEventListener('keydown', ev => {
+    switch (ev.key) {
+    case 'ArrowDown':
+      y += 3;
+      break;
+
+    case 'ArrowUp':
+      y -= 3;
+      break;
+
+    case 'ArrowLeft':
+      x -= 3;
+      break;
+
+    case 'ArrowRight':
+      x += 3;
+      break;
+
+    default:
+      console.log(ev.key);
+      break;
+    }
+
+    draw();
+  })
+
+  window.addEventListener('mousedown', ev => {
+    x = ev.pageX;
+    y = ev.pageY;
+
+    draw();
+  })
+
+  window.addEventListener('mousemove', ev => {
+    if (ev.buttons) {
+      x = ev.pageX;
+      y = ev.pageY;
+
+      draw();
+    }
+  })
+
+  draw();
+</script>
+
+</body>
+</html>
